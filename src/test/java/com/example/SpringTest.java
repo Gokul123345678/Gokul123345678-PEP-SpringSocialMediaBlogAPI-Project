@@ -111,12 +111,14 @@ public class SpringTest {
             Assertions.fail("The save / findAll methods were not found. Ensure that AccountRepository properly " +
                     "extends JPARepository.");
         }
+        @SuppressWarnings("unchecked")
         List<Account> accountList1 = (List<Account>) findAllMethod.invoke(repository, new Object[]{});
         System.out.println(accountList1);
         Assertions.assertTrue(accountList1.size() == 4, "There should be no accounts in the " +
                 "JPARepository on startup.");
         Account actualAccount = (Account) saveMethod.invoke(repository, testAccount);
         Assertions.assertEquals(actualAccount.getUsername(), expectedUsername);
+        @SuppressWarnings("unchecked")
         List<Account> accountList2 = (List<Account>) findAllMethod.invoke(repository, new Object[]{});
         Assertions.assertTrue(accountList2.size() > 4, "The account should be addable to the " +
                 "JPARepository.");
@@ -147,12 +149,14 @@ public class SpringTest {
             Assertions.fail("The save / findAll methods were not found. Ensure that MessageRepository properly " +
                     "extends JPARepository.");
         }
+        @SuppressWarnings("unchecked")
         List<Account> accountList1 = (List<Account>) findAllMethod.invoke(repository, new Object[]{});
         System.out.println(accountList1);
         Assertions.assertTrue(accountList1.size() == 3, "There should be no messages in the " +
                 "JPARepository on startup.");
         Message actualMessage = (Message) saveMethod.invoke(repository, testMessage);
         Assertions.assertEquals(actualMessage.getMessageText(), expectedText);
+        @SuppressWarnings("unchecked")
         List<Account> accountList2 = (List<Account>) findAllMethod.invoke(repository, new Object[]{});
         Assertions.assertTrue(accountList2.size() > 3, "The message should be addable to the " +
                 "JPARepository.");
